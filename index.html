@@ -1117,6 +1117,161 @@
                 font-size: 2rem;
             }
         }
+        /* FAQs Section */
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .faq-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            padding: 0 1rem;
+        }
+
+        .faq-tab {
+            background: var(--ogm-white);
+            color: var(--ogm-blue);
+            border: 2px solid var(--ogm-gold);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-tab:hover {
+            background: var(--ogm-gold);
+            color: var(--ogm-blue);
+            transform: translateY(-2px);
+        }
+
+        .faq-tab.active {
+            background: var(--ogm-blue);
+            color: var(--ogm-gold);
+            border-color: var(--ogm-blue);
+        }
+
+        .faq-content {
+            position: relative;
+        }
+
+        .faq-category {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .faq-category.active {
+            display: block;
+        }
+
+        .faq-item {
+            background: var(--ogm-white);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 1.5rem;
+            background: none;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ogm-blue);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--ogm-gold);
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            color: var(--ogm-gold);
+            transition: transform 0.3s ease;
+            font-weight: 400;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 1.5rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 1.5rem 1.5rem 1.5rem;
+        }
+
+        .faq-answer p {
+            color: var(--ogm-blue);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .faq-answer strong {
+            color: var(--ogm-gold);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive FAQs */
+        @media (max-width: 768px) {
+            .faq-tabs {
+                gap: 0.4rem;
+            }
+
+            .faq-tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .faq-question {
+                font-size: 0.95rem;
+                padding: 1.2rem;
+            }
+
+            .faq-item.active .faq-answer {
+                padding: 0 1.2rem 1.2rem 1.2rem;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -1132,6 +1287,7 @@
                 <li><a href="#practice-areas">Áreas de Práctica</a></li>
                 <li><a href="#calculator">Calculadora</a></li>
                 <li><a href="#team">Equipo</a></li>
+                <li><a href="#faqs">FAQs</a></li>
                 <li><a href="#contact">Contacto</a></li>
             </ul>
         </nav>
@@ -1419,6 +1575,316 @@
         </div>
     </section>
 
+    <!-- FAQs Section -->
+    <section id="faqs" style="background: #f8f8f8;">
+        <h2 class="section-title">Preguntas Frecuentes</h2>
+        <p class="section-subtitle">Encuentre respuestas a las consultas más comunes</p>
+        
+        <div class="faq-container">
+            <!-- Tabs Navigation -->
+            <div class="faq-tabs">
+                <button class="faq-tab active" data-category="generales">🏢 Generales</button>
+                <button class="faq-tab" data-category="laboral">⚖️ Laboral</button>
+                <button class="faq-tab" data-category="civil">🏛️ Civil</button>
+                <button class="faq-tab" data-category="comercial">🏢 Comercial</button>
+                <button class="faq-tab" data-category="familia">👨‍👩‍👧‍👦 Familia</button>
+            </div>
+
+            <!-- FAQs Content -->
+            <div class="faq-content">
+                
+                <!-- Preguntas Generales -->
+                <div class="faq-category active" data-category="generales">
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Qué días y horarios atienden?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Atendemos de lunes a viernes de 8:00 a 20:00 hs. Para urgencias fuera de horario, contáctenos por WhatsApp al +54 261 698 7536.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Cuál es el costo de la consulta inicial?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Los primeros <strong>30 minutos de consulta son completamente GRATUITOS</strong>. En ese tiempo analizamos su caso y le informamos el costo de la consulta completa. Aceptamos transferencia, tarjeta, efectivo y Mercado Pago.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Atienden de forma presencial u online?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Ofrecemos ambas modalidades. Consultas presenciales en Pedro Molina 249, Piso 3, Of. 15 (Mendoza Capital) y consultas virtuales por videollamada (Zoom, Meet, WhatsApp).</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Dónde están ubicadas sus oficinas?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Microcentro de Mendoza Capital, en Pedro Molina 249, Piso 3, Oficina 15. Hay estacionamientos a 2 cuadras, Metrotranvía y líneas de colectivos cerca.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Qué documentación debo llevar a la primera consulta?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Traiga toda la documentación relacionada: contratos, recibos de sueldo, telegramas, emails, mensajes de WhatsApp, fotos, certificados médicos, testimonios escritos. Cuanto más, mejor.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Derecho Laboral -->
+                <div class="faq-category" data-category="laboral">
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Me pueden despedir sin causa? ¿Qué indemnización corresponde?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Sí, pueden despedirlo sin causa. La indemnización es: <strong>1 sueldo por año trabajado</strong> (o fracción mayor a 3 meses) + preaviso + integración del mes + SAC proporcional + vacaciones no gozadas. Use nuestra calculadora online arriba.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Estoy en negro hace más de 3 años y me despidieron, ¿qué puedo reclamar?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Puede reclamar toda la indemnización como si estuviera registrado + <strong>multa Art. 8 LNE (25% de toda la indemnización)</strong> + multa Art. 15 LNE (3 mejores sueldos) + diferencias salariales + aportes no realizados. <strong>Plazo: 2 años. ¡ACTÚE RÁPIDO!</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Soy monotributista y facturo solo a un empleador hace 8 años, ¿tengo relación laboral encubierta?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p><strong>SÍ.</strong> Si factura a un solo cliente, cumple horario, recibe órdenes y tiene exclusividad, hay fraude laboral. Puede reclamar: 8 años de salarios retroactivos, indemnización, aportes jubilatorios, obra social, vacaciones, SAC y multas Arts. 8 y 15 LNE. <strong>CONSULTE URGENTE.</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Qué es la mediación laboral en Mendoza y cuándo es obligatoria?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Es <strong>OBLIGATORIA antes de iniciar juicio laboral</strong> en Mendoza. Se hace en el CEIL (Centro de Conciliación Laboral). Si no hay acuerdo, puede demandar. Tarda aproximadamente 30-60 días.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Qué plazos tengo para iniciar reclamos laborales en Mendoza?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p><strong>2 AÑOS</strong> desde la extinción del contrato para reclamar TODO. Pasado ese plazo, prescribe. <strong>¡NO DEJE PASAR EL TIEMPO!</strong> La prescripción se interrumpe con mediación laboral o demanda.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Derecho Civil -->
+                <div class="faq-category" data-category="civil">
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Cómo inicio una mediación prejudicial obligatoria en Mendoza?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Inscríbase en el Registro de Mediadores (Colegio de Abogados Mendoza), sortee mediador y notifique a la otra parte. Dura 60 días prorrogables. Es <strong>OBLIGATORIA antes de demandar</strong> en la mayoría de casos civiles.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Compré un inmueble: ¿qué controles hacer?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Antes de escriturar: 1) <strong>Informe de dominio</strong> (Registro de la Propiedad). 2) Deudas de <strong>Impuesto Inmobiliario ATM</strong>. 3) Plano catastral. 4) Servicios (agua, luz, gas). 5) Expensas si es PH. Consulte a escribano y abogado.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Alquileres: ¿cuál es el plazo mínimo y cómo se ajusta?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p><strong>Plazo mínimo: 3 años</strong> (Ley 27.551). <strong>Ajuste: anual por índice ICL.</strong> Depósito: máximo 1 mes. Desalojo por falta de pago: intimar, mediación, demanda (6-12 meses).</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Qué plazos de prescripción aplican en casos civiles?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p><strong>Daños y perjuicios:</strong> 3 años. <strong>Deudas comerciales:</strong> 5 años. <strong>Expensas comunes:</strong> 2 años. <strong>Responsabilidad civil:</strong> 3 años desde conocimiento del daño. <strong>Contratos:</strong> 2-5 años según tipo.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Cómo iniciar una usucapión en Mendoza?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Debe demostrar: 1) Posesión continua, pública, pacífica por <strong>20 años</strong> (o 10 años con título). 2) Pago de impuestos. 3) Mejoras. Se inicia demanda judicial, se cita a colindantes y herederos. Demora 2-5 años.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Derecho Comercial y Societario -->
+                <div class="faq-category" data-category="comercial">
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Dónde inscribo una sociedad en Mendoza?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>En la <strong>Dirección de Personas Jurídicas (DPJ) de Mendoza</strong>, NO en IGJ de CABA. Ubicación: <strong>9 de Julio 500, Ciudad de Mendoza</strong>. Algunos trámites se pueden hacer online.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Qué tipo societario me conviene: SRL, SA o SAS?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p><strong>SRL:</strong> tradicional, hasta 50 socios. <strong>SA:</strong> +50 socios o salir a bolsa. <strong>SAS:</strong> simple, rápida, económica, 1 socio posible, capital variable. Para PyME: recomendamos SAS o SRL según el caso.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Cómo tramitar CUIT, ATM e Ingresos Brutos en Mendoza?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p><strong>CUIT:</strong> ARCA (necesita CUIT de socios). <strong>ATM Ingresos Brutos:</strong> Rentas Mendoza (online/presencial). <strong>Habilitación municipal:</strong> según rubro. Orden recomendado: 1) DPJ, 2) CUIT, 3) ATM, 4) Habilitación.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Cómo registrar una marca si opero en Mendoza?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Las marcas se registran en el <strong>INPI (Instituto Nacional de Propiedad Industrial)</strong> a nivel NACIONAL. Trámite online: búsqueda de antecedentes, solicitud, pago de tasa, publicación, oposiciones, registro. Demora 12-18 meses. <strong>¡PROTEJA SU MARCA desde el inicio!</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Qué incentivos fiscales hay para pymes en Mendoza?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Mendoza tiene: 1) Ley de Promoción Industrial (beneficios impositivos). 2) Créditos PyMEs (Banco Nación, Mendoza Fiduciaria). 3) Incubadoras (IDEAR, INCUTEX). 4) Régimen de Promoción de Software. Consulte en el Ministerio de Economía de Mendoza.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Derecho de Familia y Sucesiones -->
+                <div class="faq-category" data-category="familia">
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Qué requisitos necesito para divorciarme en Argentina?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Desde 2015, <strong>NO se requiere plazo de separación ni causales</strong>. Basta la voluntad de uno o ambos cónyuges. Se puede hacer de común acuerdo (más rápido y económico) o unilateral. No es necesario demostrar culpas.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Cómo se calcula la cuota alimentaria en Mendoza?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Generalmente <strong>20-30% de los ingresos del alimentante por hijo</strong>. Puede ser mayor si hay gastos extraordinarios (salud, educación privada). Se consideran todos los ingresos y necesidades del hijo.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Cómo se tramita la violencia familiar en Mendoza?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Denuncie en Juzgado de Familia (urgente) o Comisaría (fuera de horario). El juez puede ordenar: exclusión del hogar, prohibición de acercamiento, botón antipánico, alimentos provisorios. Medidas se otorgan en 24-48hs. <strong>Ley Provincial 6672</strong> de Violencia Familiar.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Qué documentación necesito para iniciar una sucesión?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Partida de defunción original, DNI del causante, partidas de nacimiento de herederos, certificado de últimas voluntades (Registro Nacional de Testamentos), títulos de propiedad, informes de deudas y testamento si existe.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            ¿Cómo se reparten los bienes en una sucesión?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Los herederos forzosos (hijos, padres, cónyuge) tienen derecho a las <strong>2/3 partes</strong> de la herencia (legítima). Solo <strong>1/3</strong> es de libre disposición. Se divide por partes iguales entre herederos forzosos del mismo grado.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Call to Action -->
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--ogm-blue); border-radius: 12px;">
+                <h3 style="color: var(--ogm-gold); margin-bottom: 1rem;">¿No encontró su respuesta?</h3>
+                <p style="color: var(--ogm-white); margin-bottom: 1.5rem;">Los primeros 30 minutos de consulta son GRATUITOS</p>
+                <a href="https://wa.me/542616987536?text=Hola%20OGM%20Abogados,%20tengo%20una%20consulta" 
+                   target="_blank" 
+                   class="btn btn-primary" 
+                   style="display: inline-block;">
+                    Consulte Ahora por WhatsApp
+                </a>
+            </div>
+
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <p>&copy; 2025 OGM Abogados. Todos los derechos reservados.</p>
@@ -1650,6 +2116,43 @@
             // Scroll suave a resultados
             resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
+
+        // FAQs Functionality
+        // Tabs Navigation
+        document.querySelectorAll('.faq-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                
+                // Update active tab
+                document.querySelectorAll('.faq-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show corresponding category
+                document.querySelectorAll('.faq-category').forEach(cat => {
+                    cat.classList.remove('active');
+                });
+                document.querySelector(`.faq-category[data-category="${category}"]`).classList.add('active');
+            });
+        });
+
+        // Accordion Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQs in current category
+                const currentCategory = faqItem.closest('.faq-category');
+                currentCategory.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current FAQ
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
