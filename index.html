@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OGM Abogados | Mendoza — Civil, Commercial & Corporate, Labor, Family & Inheritance</title>
+    <meta name="description" content="Clear and close legal counsel. Personalized attention. WhatsApp today.">
+    <meta property="og:title" content="OGM Abogados | Mendoza">
+    <meta property="og:description" content="Clear and close legal counsel. Personalized attention. WhatsApp today.">
+    <meta property="og:image" content="/assets/mendoza-drone.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ogm-blue: #0F1C2E;
+            --ogm-gold: #E8D3A4;
+            --ogm-white: #FFFFFF;
+            --ogm-gray: #A6A6A6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Serif 4', serif;
+            color: var(--ogm-blue);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--ogm-blue);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .logo-link:hover {
+            opacity: 0.85;
+        }
+
+        .logo-link:focus {
+            outline: 2px solid var(--ogm-gold);
+            outline-offset: 4px;
+        }
+
+        .logo {
+            height: 50px;
+            color: var(--ogm-gold);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--ogm-white);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--ogm-gold);
+        }
+
+        .nav-links a:focus {
+            outline: 2px solid var(--ogm-gold);
+            outline-offset: 4px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--ogm-white);
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a2332 0%, #0F1C2E 100%);
+            z-index: 1;
+        }
+
+        .hero-background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><path d="M0 400 Q300 200 600 400 T1200 400 L1200 800 L0 800 Z" fill="%23E8D3A4" opacity="0.03"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 2rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--ogm-white);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--ogm-gold);
+            font-weight: 400;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: var(--ogm-gold);
+            color: var(--ogm-blue);
+        }
+
+        .btn-primary:hover {
+            background: var(--ogm-white);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(232, 211, 164, 0.4);
+        }
+
+        .btn-primary:focus {
+            outline: 2px solid var(--ogm-white);
+            outline-offset: 4px;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--ogm-white);
+            border-color: var(--ogm-white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--ogm-white);
+            color: var(--ogm-blue);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary:focus {
+            outline: 2px solid var(--ogm-gold);
+            outline-offset: 4px;
+        }
+
+        .trust-line {
+            font-size: 0.9rem;
+            color: var(--ogm-gray);
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .trust-line span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .trust-line span::before {
+            content: '✓';
+            color: var(--ogm-gold);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            section {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            
+            .hero-content,
+            .hero h1,
+            .hero p,
+            .cta-buttons {
+                animation: none;
+            }
+            
+            .whatsapp-float::before {
+                animation: none;
+            }
+            
+            .practice-card,
+            .mvv-card,
+            .team-card {
+                opacity: 1;
+            }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--ogm-blue);
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--ogm-gray);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        #about {
+            background: var(--ogm-white);
+        }
+
+        /* Mission Vision Values */
+        #mission-vision-values {
+            background: #f8f8f8;
+        }
+
+        .mvv-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mvv-card {
+            padding: 2rem;
+            background: var(--ogm-white);
+            border-left: 4px solid var(--ogm-gold);
+            border-radius: 4px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .mvv-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(232, 211, 164, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .mvv-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(15, 28, 46, 0.15);
+        }
+
+        .mvv-card:hover::before {
+            left: 100%;
+        }
+
+        .mvv-card h3 {
+            color: var(--ogm-blue);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .mvv-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .mvv-card li {
+            padding: 0.5rem 0;
+            color: var(--ogm-blue);
+        }
+
+        .mvv-card li::before {
+            content: '•';
+            color: var(--ogm-gold);
+            font-weight: bold;
+            display: inline-block;
+            width: 1.5rem;
+        }
+
+        /* Practice Areas */
+        #practice-areas {
+            background: var(--ogm-white);
+        }
+
+        .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .practice-card {
+            padding: 2.5rem;
+            background: var(--ogm-white);
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .practice-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--ogm-gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .practice-card:hover {
+            border-color: var(--ogm-gold);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px rgba(15, 28, 46, 0.15);
+        }
+
+        .practice-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .practice-icon {
+            font-size: 3rem;
+            color: var(--ogm-gold);
+            margin-bottom: 1.5rem;
+            transition: transform 0.4s ease;
+            display: inline-block;
+        }
+
+        .practice-card:hover .practice-icon {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .practice-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--ogm-blue);
+        }
+
+        .practice-card p {
+            color: var(--ogm-gray);
+            font-size: 0.95rem;
+        }
+
+        /* Team Section */
+        #team {
+            background: #f8f8f8;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            background: var(--ogm-white);
+            padding: 2.5rem;
+            border-radius: 4px;
+            text-align: center;
+            border-top: 4px solid var(--ogm-gold);
+            transition: all 0.4s ease;
+            position: relative;
+            opacity: 0;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(15, 28, 46, 0.15);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--ogm-blue);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ogm-gold);
+            font-size: 3rem;
+            font-weight: 700;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .team-card:hover .team-avatar {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(15, 28, 46, 0.3);
+        }
+
+        .team-avatar::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid var(--ogm-gold);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .team-card:hover .team-avatar::before {
+            opacity: 1;
+        }
+
+        .team-card h3 {
+            color: var(--ogm-blue);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-role {
+            color: var(--ogm-gold);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-specialty {
+            color: var(--ogm-gray);
+            font-size: 0.95rem;
+        }
+
+        .team-note {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: var(--ogm-blue);
+            color: var(--ogm-gold);
+            text-align: center;
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        /* Calculator Styles */
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .calculator-form {
+            background: #f8f8f8;
+            padding: 2.5rem;
+            border-radius: 4px;
+            border-left: 4px solid var(--ogm-gold);
+        }
+
+        .calculator-form small {
+            display: block;
+            color: var(--ogm-gray);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .btn-calculate {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--ogm-blue);
+            color: var(--ogm-white);
+            border: none;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-calculate:hover {
+            background: var(--ogm-gold);
+            color: var(--ogm-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(15, 28, 46, 0.2);
+        }
+
+        .btn-calculate:focus {
+            outline: 2px solid var(--ogm-gold);
+            outline-offset: 2px;
+        }
+
+        .calculator-results {
+            background: var(--ogm-white);
+            border: 2px solid var(--ogm-gold);
+            border-radius: 4px;
+            padding: 2.5rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .calculator-results h3 {
+            color: var(--ogm-blue);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-summary {
+            background: var(--ogm-blue);
+            padding: 2rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease-out 0.1s backwards;
+        }
+
+        .result-total {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .result-total span {
+            color: var(--ogm-gold);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        .result-total strong {
+            color: var(--ogm-white);
+            font-size: 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            animation: countUp 0.8s ease-out 0.3s backwards;
+        }
+
+        .result-breakdown {
+            margin-bottom: 2rem;
+        }
+
+        .result-breakdown h4 {
+            color: var(--ogm-blue);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--ogm-gold);
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e0e0e0;
+            opacity: 0;
+            animation: fadeInUp 0.4s ease-out forwards;
+        }
+
+        .result-item:nth-child(2) { animation-delay: 0.1s; }
+        .result-item:nth-child(3) { animation-delay: 0.2s; }
+        .result-item:nth-child(4) { animation-delay: 0.3s; }
+        .result-item:nth-child(5) { animation-delay: 0.4s; }
+        .result-item:nth-child(6) { animation-delay: 0.5s; }
+        .result-item:nth-child(7) { animation-delay: 0.6s; }
+        .result-item:nth-child(8) { animation-delay: 0.7s; }
+
+        .result-item span {
+            color: var(--ogm-gray);
+        }
+
+        .result-item strong {
+            color: var(--ogm-blue);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .result-disclaimer {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .result-disclaimer strong {
+            color: #f57c00;
+        }
+
+        .result-actions {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .calculator-info {
+            grid-column: 1 / -1;
+            background: #f8f8f8;
+            padding: 2rem;
+            border-radius: 4px;
+            margin-top: 2rem;
+        }
+
+        .calculator-info h4 {
+            color: var(--ogm-blue);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .calculator-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .calculator-info li {
+            padding: 0.8rem 0;
+            color: var(--ogm-blue);
+            line-height: 1.6;
+        }
+
+        .calculator-info li::before {
+            content: '✓';
+            color: var(--ogm-gold);
+            font-weight: bold;
+            margin-right: 0.8rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--ogm-white);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--ogm-gold);
+            min-width: 30px;
+        }
+
+        .contact-item h4 {
+            color: var(--ogm-blue);
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-item p {
+            color: var(--ogm-gray);
+        }
+
+        .contact-link {
+            color: var(--ogm-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .contact-link:hover {
+            color: var(--ogm-gold);
+            text-decoration: underline;
+        }
+
+        .contact-link:focus {
+            outline: 2px solid var(--ogm-gold);
+            outline-offset: 2px;
+        }
+
+        .contact-form {
+            background: #f8f8f8;
+            padding: 2rem;
+            border-radius: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--ogm-blue);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Source Serif 4', serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--ogm-gold);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            background: var(--ogm-blue);
+            color: var(--ogm-white);
+            border: none;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            background: var(--ogm-gold);
+            color: var(--ogm-blue);
+        }
+
+        .form-submit:focus {
+            outline: 2px solid var(--ogm-gold);
+            outline-offset: 2px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--ogm-blue);
+            color: var(--ogm-white);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer p {
+            color: var(--ogm-gray);
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--ogm-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 999;
+            transition: all 0.3s ease;
+            animation: pulse 6s infinite;
+        }
+
+        .whatsapp-float::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid var(--ogm-gold);
+            animation: ripple 2s infinite;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .whatsapp-float:focus {
+            outline: 3px solid var(--ogm-white);
+            outline-offset: 3px;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--ogm-white);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .mvv-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .practice-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .calculator-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .calculator-form,
+            .calculator-results {
+                padding: 1.5rem;
+            }
+
+            .result-total strong {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav>
+            <a href="https://wa.me/542616987536" target="_blank" rel="noopener noreferrer" class="logo-link" aria-label="Contactar por WhatsApp">
+                <div class="logo">OGM Abogados</div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#about">Nosotros</a></li>
+                <li><a href="#practice-areas">Áreas de Práctica</a></li>
+                <li><a href="#calculator">Calculadora</a></li>
+                <li><a href="#team">Equipo</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h1>Su tranquilidad legal, respaldada por experiencia y estrategia</h1>
+            <p>Asesoramiento jurídico claro y efectivo para empresas, emprendedores y particulares</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/542616987536" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Consulta por WhatsApp</a>
+                <a href="#about" class="btn btn-secondary">Conocer Más</a>
+            </div>
+            <div class="trust-line">
+                <span>Respuesta el mismo día</span>
+                <span>Atención personalizada</span>
+                <span>Confidencialidad</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">Cercanos, claros y comprometidos con su caso</h2>
+        <p class="section-subtitle">
+            En OGM Abogados combinamos estrategia jurídica con un enfoque humano. Creemos que cada cliente merece soluciones legales personalizadas, comunicación transparente y un compromiso real con sus objetivos. Nuestro equipo trabaja de manera integral para proteger sus intereses y brindarle la tranquilidad que necesita.
+        </p>
+    </section>
+
+    <!-- Mission Vision Values -->
+    <section id="mission-vision-values">
+        <h2 class="section-title">Nuestros Pilares</h2>
+        <div class="mvv-grid">
+            <div class="mvv-card">
+                <h3>Misión</h3>
+                <p>Brindar soluciones legales integrales con un enfoque humano y estratégico, acompañando a nuestros clientes en cada etapa de sus procesos jurídicos.</p>
+            </div>
+            <div class="mvv-card">
+                <h3>Visión</h3>
+                <p>Ser un estudio de referencia en asesoramiento corporativo y litigación estratégica, reconocido por nuestra ética, eficiencia e innovación en el ejercicio del derecho.</p>
+            </div>
+            <div class="mvv-card">
+                <h3>Valores</h3>
+                <ul>
+                    <li>Compromiso</li>
+                    <li>Excelencia</li>
+                    <li>Cercanía</li>
+                    <li>Innovación</li>
+                    <li>Ética y Respeto</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practice Areas -->
+    <section id="practice-areas">
+        <h2 class="section-title">Áreas de Práctica</h2>
+        <p class="section-subtitle">Soluciones jurídicas especializadas para cada necesidad</p>
+        <div class="practice-grid">
+            <div class="practice-card">
+                <div class="practice-icon">⚖️</div>
+                <h3>Derecho Civil</h3>
+                <p>Contratos, daños y perjuicios, responsabilidad civil, derecho del consumidor.</p>
+            </div>
+            <div class="practice-card">
+                <div class="practice-icon">🏢</div>
+                <h3>Comercial y Societario</h3>
+                <p>Constitución de sociedades, asesoramiento corporativo, cumplimiento contractual.</p>
+            </div>
+            <div class="practice-card">
+                <div class="practice-icon">👔</div>
+                <h3>Derecho Laboral</h3>
+                <p>Despidos, reclamos laborales, acuerdos transaccionales.</p>
+            </div>
+            <div class="practice-card">
+                <div class="practice-icon">👨‍👩‍👧‍👦</div>
+                <h3>Familia y Sucesiones</h3>
+                <p>Divorcios, tenencia, cuota alimentaria, sucesiones.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculadora de Indemnización -->
+    <section id="calculator" style="background: var(--ogm-white);">
+        <h2 class="section-title">Calculadora de Indemnización por Despido</h2>
+        <p class="section-subtitle">Calcule una estimación de su indemnización según la legislación laboral argentina vigente</p>
+        
+        <div class="calculator-container">
+            <div class="calculator-form">
+                <div class="form-group">
+                    <label for="salario">Mejor sueldo bruto mensual del último año *</label>
+                    <input type="number" id="salario" step="0.01" min="0" required placeholder="Ej: 500000">
+                    <small>Incluya sueldo básico + adicionales habituales</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaIngreso">Fecha de ingreso *</label>
+                    <input type="date" id="fechaIngreso" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaEgreso">Fecha de egreso/despido *</label>
+                    <input type="date" id="fechaEgreso" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="diasVacaciones">Días de vacaciones no gozadas</label>
+                    <input type="number" id="diasVacaciones" min="0" max="35" value="0" placeholder="0">
+                    <small>Días de vacaciones que no tomó este año</small>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="conPreaviso">
+                        <span>¿El empleador otorgó preaviso?</span>
+                    </label>
+                </div>
+
+                <button type="button" class="btn-calculate" onclick="calcularIndemnizacion()">
+                    Calcular Indemnización
+                </button>
+            </div>
+
+            <div class="calculator-results" id="results" style="display: none;">
+                <h3>Resultado del Cálculo</h3>
+                <div class="result-summary">
+                    <div class="result-total">
+                        <span>TOTAL ESTIMADO</span>
+                        <strong id="totalAmount">$0</strong>
+                    </div>
+                </div>
+                
+                <div class="result-breakdown">
+                    <h4>Desglose de conceptos:</h4>
+                    <div class="result-item">
+                        <span>Antigüedad trabajada:</span>
+                        <strong id="antiguedad">-</strong>
+                    </div>
+                    <div class="result-item">
+                        <span>Indemnización por antigüedad (Art. 245):</span>
+                        <strong id="indemnizacionAntiguedad">$0</strong>
+                    </div>
+                    <div class="result-item">
+                        <span>Preaviso (Art. 231-232):</span>
+                        <strong id="preaviso">$0</strong>
+                    </div>
+                    <div class="result-item">
+                        <span>Integración mes de despido:</span>
+                        <strong id="integracion">$0</strong>
+                    </div>
+                    <div class="result-item">
+                        <span>SAC sobre preaviso e integración:</span>
+                        <strong id="sacPreaviso">$0</strong>
+                    </div>
+                    <div class="result-item">
+                        <span>Vacaciones no gozadas:</span>
+                        <strong id="vacaciones">$0</strong>
+                    </div>
+                    <div class="result-item">
+                        <span>SAC proporcional:</span>
+                        <strong id="sacProporcional">$0</strong>
+                    </div>
+                </div>
+
+                <div class="result-disclaimer">
+                    <strong>⚠️ Importante:</strong> Este cálculo es orientativo y puede variar según circunstancias particulares de cada caso (convenio colectivo aplicable, tipo de despido, conceptos salariales adicionales, etc.). Para un análisis preciso de su situación, consulte con nuestros abogados laboralistas.
+                </div>
+
+                <div class="result-actions">
+                    <a href="https://wa.me/542616987536?text=Hola,%20calculé%20mi%20indemnización%20y%20quisiera%20una%20consulta%20laboral" target="_blank" class="btn btn-primary">
+                        Consultar con un Abogado
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="calculator-info">
+            <h4>Conceptos incluidos en el cálculo:</h4>
+            <ul>
+                <li><strong>Indemnización por antigüedad:</strong> 1 mes de sueldo por cada año trabajado o fracción mayor a 3 meses (Art. 245 LCT)</li>
+                <li><strong>Preaviso:</strong> 1 mes si trabajó menos de 5 años, 2 meses si trabajó 5 años o más (Art. 231-232 LCT)</li>
+                <li><strong>Integración del mes:</strong> Si el despido no coincide con el último día del mes</li>
+                <li><strong>SAC proporcional:</strong> Aguinaldo correspondiente al período trabajado en el año</li>
+                <li><strong>Vacaciones no gozadas:</strong> Según días de vacaciones que correspondan por antigüedad</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section id="team">
+        <h2 class="section-title">Nuestro Equipo</h2>
+        <p class="section-subtitle">Profesionales comprometidos con su tranquilidad legal</p>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar">JO</div>
+                <h3>Dr. Jorge Rafael Ojeda</h3>
+                <p class="team-role">Fundador</p>
+                <p class="team-specialty">Especialista en Derecho Laboral<br>Matrícula #10006</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">LM</div>
+                <h3>Dr. Leonardo Miatello</h3>
+                <p class="team-role">Co-fundador</p>
+                <p class="team-specialty">Especialista en Derecho Civil y Comercial</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">MG</div>
+                <h3>Dra. María Guevara</h3>
+                <p class="team-role">Co-fundadora</p>
+                <p class="team-specialty">Especialista en Derecho Societario y Familia</p>
+            </div>
+        </div>
+        <div class="team-note">
+            Cada consulta es atendida directamente por nuestros abogados
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2 class="section-title">Contacto</h2>
+        <p class="section-subtitle">Estamos aquí para ayudarle</p>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <h4>Teléfono / WhatsApp</h4>
+                        <p><a href="https://wa.me/542616987536" target="_blank" rel="noopener noreferrer" class="contact-link">+54 261 698 7536</a></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <h4>Email</h4>
+                        <p><a href="mailto:estudio.ogm@gmail.com" class="contact-link">estudio.ogm@gmail.com</a></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🕒</div>
+                    <div>
+                        <h4>Horario</h4>
+                        <p>Lunes a Viernes<br>8:00 - 20:00</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h4>Dónde nos ubicamos</h4>
+                        <p><a href="https://maps.google.com/?q=Pedro+Molina+249,+Piso+3,+Oficina+15,+Ciudad+de+Mendoza" target="_blank" rel="noopener noreferrer" class="contact-link">Pedro Molina 249, Piso 3, Oficina 15<br>Ciudad de Mendoza</a></p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Nombre *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Teléfono</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="topic">Tema</label>
+                    <select id="topic" name="topic">
+                        <option value="">Seleccione un área</option>
+                        <option value="civil">Derecho Civil</option>
+                        <option value="comercial">Comercial y Societario</option>
+                        <option value="laboral">Derecho Laboral</option>
+                        <option value="familia">Familia y Sucesiones</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensaje</label>
+                    <textarea id="message" name="message"></textarea>
+                </div>
+                <button type="submit" class="form-submit">Enviar Consulta</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 OGM Abogados. Todos los derechos reservados.</p>
+        <p>Mendoza, Argentina</p>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/542616987536" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 0C7.164 0 0 7.164 0 16c0 2.828.736 5.484 2.016 7.78L.096 30.912l7.328-1.92A15.91 15.91 0 0 0 16 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm0 29.333c-2.548 0-4.956-.708-7.012-1.936l-.5-.3-5.18 1.356 1.38-5.048-.328-.52A13.25 13.25 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.292-9.98c-.4-.2-2.364-1.168-2.732-1.3-.368-.132-.636-.2-.904.2-.268.4-1.036 1.3-1.268 1.568-.232.268-.468.3-.868.1-.4-.2-1.688-.62-3.216-1.98-1.188-1.06-1.992-2.368-2.224-2.768-.232-.4-.024-.616.176-.816.18-.18.4-.468.6-.7.2-.232.268-.4.4-.668.132-.268.068-.5-.032-.7-.1-.2-.904-2.176-1.24-2.98-.328-.78-.66-.676-.904-.688-.232-.012-.5-.016-.768-.016s-.7.1-1.068.5c-.368.4-1.404 1.372-1.404 3.348s1.436 3.88 1.636 4.148c.2.268 2.828 4.316 6.848 6.052.956.412 1.704.66 2.288.844.96.308 1.836.264 2.528.16.772-.116 2.364-.968 2.696-1.9.332-.932.332-1.732.232-1.9-.1-.168-.368-.268-.768-.468z"/>
+        </svg>
+    </a>
+
+    <script>
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-content');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                hero.style.opacity = 1 - (scrolled / 600);
+            }
+        });
+
+        // Scroll reveal animation with stagger
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -80px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Add stagger effect to children
+                    const children = entry.target.querySelectorAll('.practice-card, .team-card, .mvv-card');
+                    children.forEach((child, index) => {
+                        setTimeout(() => {
+                            child.style.animation = `fadeInUp 0.6s ease-out forwards`;
+                        }, index * 100);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Header scroll effect with hide/show
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Form submission
+        function handleSubmit(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const phone = formData.get('phone');
+            const topic = formData.get('topic');
+            const message = formData.get('message');
+            
+            // Create WhatsApp message
+            let whatsappMessage = `Hola, mi nombre es ${name}.%0A`;
+            if (topic) whatsappMessage += `Consulta sobre: ${topic}%0A`;
+            if (message) whatsappMessage += `Mensaje: ${message}%0A`;
+            whatsappMessage += `Email: ${email}%0A`;
+            if (phone) whatsappMessage += `Teléfono: ${phone}`;
+            
+            window.open(`https://wa.me/542616987536?text=${whatsappMessage}`, '_blank');
+            e.target.reset();
+        }
+
+        // Calculadora de Indemnización
+        function calcularIndemnizacion() {
+            // Obtener valores del formulario
+            const salario = parseFloat(document.getElementById('salario').value);
+            const fechaIngreso = new Date(document.getElementById('fechaIngreso').value);
+            const fechaEgreso = new Date(document.getElementById('fechaEgreso').value);
+            const diasVacaciones = parseInt(document.getElementById('diasVacaciones').value) || 0;
+            const conPreaviso = document.getElementById('conPreaviso').checked;
+
+            // Validaciones
+            if (!salario || salario <= 0) {
+                alert('Por favor ingrese un salario válido');
+                return;
+            }
+            if (!fechaIngreso || !fechaEgreso) {
+                alert('Por favor ingrese las fechas de ingreso y egreso');
+                return;
+            }
+            if (fechaEgreso < fechaIngreso) {
+                alert('La fecha de egreso no puede ser anterior a la fecha de ingreso');
+                return;
+            }
+
+            // Calcular antigüedad
+            const diffTime = Math.abs(fechaEgreso - fechaIngreso);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const años = Math.floor(diffDays / 365);
+            const mesesRestantes = Math.floor((diffDays % 365) / 30);
+            const diasRestantes = (diffDays % 365) % 30;
+
+            // Calcular fracción para indemnización (si es mayor a 3 meses, cuenta como año completo)
+            let añosParaIndemnizacion = años;
+            if (mesesRestantes > 3) {
+                añosParaIndemnizacion += 1;
+            } else if (mesesRestantes > 0 || diasRestantes > 0) {
+                añosParaIndemnizacion += mesesRestantes / 12;
+            }
+
+            // 1. Indemnización por antigüedad (Art. 245 LCT)
+            const indemnizacionAntiguedad = salario * añosParaIndemnizacion;
+
+            // 2. Preaviso (Art. 231-232 LCT)
+            let mesesPreaviso = 0;
+            if (!conPreaviso) {
+                mesesPreaviso = años < 5 ? 1 : 2;
+            }
+            const preaviso = salario * mesesPreaviso;
+
+            // 3. Integración del mes de despido
+            let integracion = 0;
+            if (!conPreaviso) {
+                const ultimoDiaMes = new Date(fechaEgreso.getFullYear(), fechaEgreso.getMonth() + 1, 0);
+                const diasFaltantes = Math.ceil((ultimoDiaMes - fechaEgreso) / (1000 * 60 * 60 * 24));
+                if (diasFaltantes > 0) {
+                    integracion = (salario / 30) * diasFaltantes;
+                }
+            }
+
+            // 4. SAC sobre preaviso e integración
+            const sacPreaviso = (preaviso + integracion) / 12;
+
+            // 5. Vacaciones no gozadas
+            const salarioDiario = salario / 30;
+            const vacaciones = salarioDiario * diasVacaciones;
+
+            // 6. SAC proporcional del año
+            const inicioAño = new Date(fechaEgreso.getFullYear(), 0, 1);
+            const mesesTrabajadosAño = Math.floor((fechaEgreso - inicioAño) / (1000 * 60 * 60 * 24 * 30));
+            const sacProporcional = (salario / 12) * (mesesTrabajadosAño / 6);
+
+            // Total
+            const total = indemnizacionAntiguedad + preaviso + integracion + sacPreaviso + vacaciones + sacProporcional;
+
+            // Mostrar resultados
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.style.display = 'block';
+
+            // Formato de moneda
+            const formatCurrency = (amount) => {
+                return new Intl.NumberFormat('es-AR', {
+                    style: 'currency',
+                    currency: 'ARS',
+                    minimumFractionDigits: 2
+                }).format(amount);
+            };
+
+            // Actualizar valores en el DOM
+            document.getElementById('totalAmount').textContent = formatCurrency(total);
+            document.getElementById('antiguedad').textContent = `${años} años, ${mesesRestantes} meses, ${diasRestantes} días`;
+            document.getElementById('indemnizacionAntiguedad').textContent = formatCurrency(indemnizacionAntiguedad);
+            document.getElementById('preaviso').textContent = conPreaviso ? 'Ya otorgado' : formatCurrency(preaviso);
+            document.getElementById('integracion').textContent = formatCurrency(integracion);
+            document.getElementById('sacPreaviso').textContent = formatCurrency(sacPreaviso);
+            document.getElementById('vacaciones').textContent = formatCurrency(vacaciones);
+            document.getElementById('sacProporcional').textContent = formatCurrency(sacProporcional);
+
+            // Scroll suave a resultados
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
