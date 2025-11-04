@@ -1485,13 +1485,25 @@
         <div class="team-grid">
             <div class="team-card">
                 <div class="team-avatar">JO</div>
-                <h3>Dr. Jorge Rafael Ojeda y Asociados</h3>
+                <h3>Dr. Jorge Rafael Ojeda</h3>
                 <p class="team-role">Fundador</p>
-                <p class="team-specialty">Especialista en Derecho Laboral, Civil y Comercial<br>Matrícula #10006</p>
+                <p class="team-specialty">Especialista en Derecho Laboral<br>Matrícula #10006</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">LM</div>
+                <h3>Dr. Leonardo Miatello</h3>
+                <p class="team-role">Co-fundador</p>
+                <p class="team-specialty">Especialista en Derecho Civil y Comercial</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">MG</div>
+                <h3>Dra. María Guevara</h3>
+                <p class="team-role">Co-fundadora</p>
+                <p class="team-specialty">Especialista en Derecho Societario y Familia</p>
             </div>
         </div>
         <div class="team-note">
-            Cada consulta es atendida directamente por nuestros abogados especializados
+            Cada consulta es atendida directamente por nuestros abogados
         </div>
     </section>
 
@@ -2031,20 +2043,16 @@
             // Calcular antigüedad
             const diffTime = Math.abs(fechaEgreso - fechaIngreso);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            const años = Math.floor(diffDays / 365.25); // Usar 365.25 para considerar años bisiestos
-            const diasRestantesDelAño = diffDays - (años * 365.25);
-            const mesesRestantes = Math.floor(diasRestantesDelAño / 30.44);
-            const diasRestantes = Math.floor(diasRestantesDelAño % 30.44);
+            const años = Math.floor(diffDays / 365);
+            const mesesRestantes = Math.floor((diffDays % 365) / 30);
+            const diasRestantes = (diffDays % 365) % 30;
 
-            // Calcular fracción para indemnización según Art. 245 LCT
-            // "La fracción mayor de 3 meses se considera como año completo"
+            // Calcular fracción para indemnización (si es mayor a 3 meses, cuenta como año completo)
             let añosParaIndemnizacion = años;
-            if (mesesRestantes >= 3) {
-                // Fracción mayor o igual a 3 meses = cuenta como 1 año completo
+            if (mesesRestantes > 3) {
                 añosParaIndemnizacion += 1;
             } else if (mesesRestantes > 0 || diasRestantes > 0) {
-                // Fracción menor a 3 meses = se calcula proporcional
-                añosParaIndemnizacion += (mesesRestantes + diasRestantes/30) / 12;
+                añosParaIndemnizacion += mesesRestantes / 12;
             }
 
             // 1. Indemnización por antigüedad (Art. 245 LCT)
@@ -2074,25 +2082,10 @@
             const salarioDiario = salario / 30;
             const vacaciones = salarioDiario * diasVacaciones;
 
-            // 6. SAC proporcional del año (correspondiente al semestre en curso)
-            // Determinar qué semestre es
-            const mesFechaEgreso = fechaEgreso.getMonth(); // 0 = Enero, 11 = Diciembre
-            let inicioSemestre;
-            
-            if (mesFechaEgreso < 6) {
-                // Primer semestre (Enero - Junio)
-                inicioSemestre = new Date(fechaEgreso.getFullYear(), 0, 1);
-            } else {
-                // Segundo semestre (Julio - Diciembre)
-                inicioSemestre = new Date(fechaEgreso.getFullYear(), 6, 1);
-            }
-            
-            // Calcular meses trabajados en el semestre actual
-            const diffMilisegundos = fechaEgreso - inicioSemestre;
-            const mesesTrabajadosSemestre = diffMilisegundos / (1000 * 60 * 60 * 24 * 30.44); // Promedio real de días por mes
-            
-            // SAC proporcional = (salario / 12) * meses trabajados en el semestre
-            const sacProporcional = (salario / 12) * mesesTrabajadosSemestre;
+            // 6. SAC proporcional del año
+            const inicioAño = new Date(fechaEgreso.getFullYear(), 0, 1);
+            const mesesTrabajadosAño = Math.floor((fechaEgreso - inicioAño) / (1000 * 60 * 60 * 24 * 30));
+            const sacProporcional = (salario / 12) * (mesesTrabajadosAño / 6);
 
             // Total
             const total = indemnizacionAntiguedad + preaviso + integracion + sacPreaviso + vacaciones + sacProporcional;
@@ -2161,5 +2154,8 @@
             });
         });
     </script>
+        <script src="chat-widget-publico.js"></script>
+        <script src="chat-widget-privado.js"></script>
+
 </body>
 </html>
