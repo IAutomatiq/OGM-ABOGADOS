@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendar Cita - Estudio Legal Mendoza</title>
+  <style>
+    /* ====================================== */
+    /* CONFIGURACIÓN DEL CALENDARIO */
+    /* ====================================== */
+    :root {
+      /* WEBHOOKS */
+      --webhook-check-slots: 'https://n8n-stack-n8n.bnilvd.easypanel.host/webhook/suarify-check-booking-date';
+      --webhook-make-booking: 'https://n8n-stack-n8n.bnilvd.easypanel.host/webhook/suarify-make-booking';
+      
+      /* TEXTOS */
+      --title: 'Agendar tu Cita';
+      --label-name: 'Nombre completo';
+      --label-email: 'Email';
+      --label-phone: 'Teléfono';
+      --label-meeting-type: 'Tipo de reunión';
+      --label-date: 'Seleccioná la fecha';
+      --label-slots: 'Horarios disponibles';
+      --button-confirm: 'Confirmar Cita';
+      --button-cancel: 'Cancelar';
+      --message-loading: 'Cargando horarios...';
+      --message-success: '✅ ¡Cita confirmada!';
+      --message-error: 'Hubo un problema. Intentá nuevamente.';
+      
+      /* COLORES (mismo que el widget) */
+      --color-header-gradient-start: #773EE2;
+      --color-header-gradient-end: #008BDE;
+      --color-header-text: #ffffff;
+      --color-background: #f8f9fa;
+      --color-card-background: #ffffff;
+      --color-input-background: #ffffff;
+      --color-input-text: #1e1e1f;
+      --color-input-border: #e0e0e0;
+      --color-input-border-focus: #011066ff;
+      --color-slot-available: #a8f958;
+      --color-slot-available-hover: #8ed73d;
+      --color-slot-available-text: #333;
+      --color-slot-occupied: #e0e0e0;
+      --color-slot-occupied-text: #999;
+      --color-slot-selected: #285af0;
+      --color-slot-selected-text: #ffffff;
+      --color-button-confirm-bg: #a8f958;
+      --color-button-confirm-hover: #8ed73d;
+      --color-button-confirm-text: #333;
+      --color-button-cancel-bg: #666666;
+      --color-button-cancel-hover: #555555;
+      --color-button-cancel-text: #ffffff;
+      
+      /* TAMAÑOS Y ESPACIADO */
+      --font-size-base: 14px;
+      --font-size-title: 20px;
+      --font-size-label: 13px;
+      --font-size-slot: 13px;
+      --border-radius-main: 16px;
+      --border-radius-input: 8px;
+      --border-radius-slot: 8px;
+      --border-radius-button: 8px;
+      --border-width: 2px;
+      --padding-main: 20px;
+      --padding-header: 16px;
+      --padding-input: 5px 7px;
+      --padding-slot: 6px 8px;
+      --padding-button: 12px 24px;
+      --gap-inputs: 7x;
+      --gap-slots: 7px;
+      --gap-buttons: 10px;
+      
+      /* EFECTOS */
+      --box-shadow-main: 0 5px 40px rgba(0, 0, 0, 0.16);
+      --box-shadow-slot: 0 2px 8px rgba(0, 0, 0, 0.1);
+      --transition-duration: 0.2s;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    
+    body {
+      background-color: transparent;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow: hidden;
+    }
+    
+    .calendar-container {
+      background-color: var(--color-card-background);
+      border-radius: var(--border-radius-main);
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      position: relative;
+      z-index: 100;
+    }
+    
+    .calendar-header {
+      background: linear-gradient(135deg, var(--color-header-gradient-start) 0%, var(--color-header-gradient-end) 100%);
+      color: var(--color-header-text);
+      padding: var(--padding-header);
+      text-align: center;
+    }
+    
+    .calendar-header h1 {
+      font-size: var(--font-size-title);
+      font-weight: 600;
+    }
+    
+    .calendar-body {
+      padding: var(--padding-main);
+    }
+    
+    .form-group {
+      margin-bottom: var(--gap-inputs);
+    }
+    
+    .form-group label {
+      display: block;
+      font-size: var(--font-size-label);
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: #333;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: var(--padding-input);
+      font-size: var(--font-size-base);
+      border: var(--border-width) solid var(--color-input-border);
+      border-radius: var(--border-radius-input);
+      background-color: var(--color-input-background);
+      color: var(--color-input-text);
+      transition: border-color var(--transition-duration);
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--color-input-border-focus);
+    }
+    
+    .form-group input:disabled {
+      background-color: #f5f5f5;
+      color: #999;
+      cursor: not-allowed;
+    }
+
+    .form-group .meeting-type-options {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    .meeting-type-option {
+      flex: 1;
+      padding: var(--padding-input);
+      font-size: var(--font-size-base);
+      border: var(--border-width) solid var(--color-input-border);
+      border-radius: var(--border-radius-input);
+      background-color: var(--color-input-background);
+      color: var(--color-input-text);
+      cursor: pointer;
+      transition: all var(--transition-duration);
+      text-align: center;
+    }
+
+    .meeting-type-option:hover {
+      background-color: var(--color-slot-available);
+      border-color: var(--color-slot-available);
+    }
+
+    .meeting-type-option.selected {
+      background-color: var(--color-slot-selected);
+      color: var(--color-slot-selected-text);
+      border-color: var(--color-slot-selected);
+    }
+    
+    .slots-container {
+      margin-top: var(--gap-inputs);
+    }
+    
+    .slots-container h3 {
+      font-size: var(--font-size-base);
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #333;
+    }
+    
+    .slots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: var(--gap-slots);
+      margin-bottom: var(--gap-inputs);
+    }
+    
+    .slot {
+      padding: var(--padding-slot);
+      font-size: var(--font-size-slot);
+      font-weight: 400; /*500*/
+      text-align: center;
+      border-radius: var(--border-radius-slot);
+      cursor: pointer;
+      transition: all var(--transition-duration);
+      border: var(--border-width) solid transparent;
+    }
+    
+    .slot.available {
+      background-color: var(--color-slot-available);
+      color: var(--color-slot-available-text);
+    }
+    
+    .slot.available:hover {
+      background-color: var(--color-slot-available-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--box-shadow-slot);
+    }
+    
+    .slot.occupied {
+      background-color: var(--color-slot-occupied);
+      color: var(--color-slot-occupied-text);
+      cursor: not-allowed;
+    }
+    
+    .slot.selected {
+      background-color: var(--color-slot-selected);
+      color: var(--color-slot-selected-text);
+      border-color: var(--color-slot-selected);
+      transform: scale(1.05);
+    }
+    
+    .loading-message {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      font-size: var(--font-size-base);
+    }
+    
+    .success-message {
+      text-align: center;
+      padding: 30px;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-slot-available-text);
+    }
+    
+    .error-message {
+      background-color: #fee;
+      color: #c33;
+      padding: 12px;
+      border-radius: var(--border-radius-input);
+      margin-bottom: var(--gap-inputs);
+      font-size: var(--font-size-base);
+      text-align: center;
+    }
+    
+    .buttons-container {
+      display: flex;
+      gap: var(--gap-buttons);
+      margin-top: 20px;
+    }
+    
+    .button {
+      flex: 1;
+      padding: var(--padding-button);
+      font-size: var(--font-size-base);
+      font-weight: 600;
+      border: none;
+      border-radius: var(--border-radius-button);
+      cursor: pointer;
+      transition: all var(--transition-duration);
+    }
+    
+    .button-confirm {
+      background-color: var(--color-button-confirm-bg);
+      color: var(--color-button-confirm-text);
+    }
+    
+    .button-confirm:hover:not(:disabled) {
+      background-color: var(--color-button-confirm-hover);
+      transform: translateY(-2px);
+    }
+    
+    .button-confirm:disabled {
+      background-color: #ccc;
+      color: #999;
+      cursor: not-allowed;
+    }
+    
+    .button-cancel {
+      background-color: var(--color-button-cancel-bg);
+      color: var(--color-button-cancel-text);
+    }
+    
+    .button-cancel:hover {
+      background-color: var(--color-button-cancel-hover);
+    }
+    
+    .hidden {
+      display: none !important;
+    }
+    
+    /* Cursor de carga */
+    .loading {
+      cursor: wait !important;
+    }
+    
+    .loading * {
+      cursor: wait !important;
+    }
+    
+    @media (max-width: 480px) {
+      .calendar-container {
+        max-width: 100%;
+      }
+      
+      .slots-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calendar-container">
+    <div class="calendar-header">
+      <h1 id="calendar-title">Agendar tu Cita</h1>
+    </div>
+    
+    <div class="calendar-body">
+      <div id="error-container" class="error-message hidden"></div>
+      
+      <div id="form-container">
+        <div class="form-group">
+          <label for="input-name">Nombre completo</label>
+          <input type="text" id="input-name" placeholder="Juan Pérez">
+        </div>
+        
+        <div class="form-group">
+          <label for="input-email">Email</label>
+          <input type="email" id="input-email" placeholder="juan@example.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="input-phone">Teléfono</label>
+          <input type="tel" id="input-phone" placeholder="+54 261 1234-5678">
+        </div>
+
+        <div class="form-group">
+          <label>Tipo de reunión</label>
+          <div class="meeting-type-options">
+            <div class="meeting-type-option" data-type="virtual">Virtual (Videollamada)</div>
+            <div class="meeting-type-option" data-type="presencial">Presencial (Estudio)</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="input-date">Seleccioná la fecha</label>
+          <input type="date" id="input-date">
+        </div>
+        
+        <div class="slots-container hidden" id="slots-container">
+          <h3>Horarios disponibles</h3>
+          <div id="loading-message" class="loading-message hidden">Cargando horarios...</div>
+          <div class="slots-grid" id="slots-grid"></div>
+        </div>
+        
+        <div class="buttons-container">
+          <button class="button button-cancel" id="button-cancel">Cancelar</button>
+          <button class="button button-confirm" id="button-confirm" disabled>Confirmar Cita</button>
+        </div>
+      </div>
+      
+      <div id="success-container" class="success-message hidden">
+        ✅ ¡Cita confirmada!
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ====================================== */
+    /* CONFIGURACIÓN JavaScript */
+    /* ====================================== */
+    const CONFIG = {
+      webhooks: {
+        checkSlots: 'https://n8n-stack-n8n.bnilvd.easypanel.host/webhook/suarify-check-booking-date',
+        makeBooking: 'https://n8n-stack-n8n.bnilvd.easypanel.host/webhook/suarify-make-booking'
+      },
+      texts: {
+        title: 'Agendar tu Cita',
+        labelName: 'Nombre completo',
+        labelEmail: 'Email',
+        labelPhone: 'Teléfono',
+        labelDate: 'Seleccioná la fecha',
+        labelSlots: 'Horarios disponibles',
+        buttonConfirm: 'Confirmar Cita',
+        buttonCancel: 'Cancelar',
+        messageLoading: 'Cargando horarios...',
+        messageSuccess: '✅ ¡Cita confirmada!',
+        messageError: 'Hubo un problema. Intentá nuevamente.',
+        messageNoSlots: 'No hay horarios disponibles para esta fecha.'
+      },
+      behavior: {
+        autoCloseDelay: 2000, // Milisegundos antes de cerrar después de confirmar
+        minDate: 0, // Días mínimos desde hoy para agendar
+        maxDate: 60 // Días máximos desde hoy para agendar
+      }
+    };
+    
+    /* ====================================== */
+    /* ESTADO DE LA APLICACIÓN */
+    /* ====================================== */
+    let state = {
+      clientData: {
+        name: '',
+        email: '',
+        phone: '',
+        meetingType: '' // 'virtual' o 'presencial'
+      },
+      selectedDate: '',
+      selectedSlot: null,
+      availableSlots: []
+    };
+    
+    /* ====================================== */
+    /* ELEMENTOS DEL DOM */
+    /* ====================================== */
+    const elements = {
+      inputName: document.getElementById('input-name'),
+      inputEmail: document.getElementById('input-email'),
+      inputPhone: document.getElementById('input-phone'),
+      inputDate: document.getElementById('input-date'),
+      slotsContainer: document.getElementById('slots-container'),
+      slotsGrid: document.getElementById('slots-grid'),
+      loadingMessage: document.getElementById('loading-message'),
+      errorContainer: document.getElementById('error-container'),
+      formContainer: document.getElementById('form-container'),
+      successContainer: document.getElementById('success-container'),
+      buttonConfirm: document.getElementById('button-confirm'),
+      buttonCancel: document.getElementById('button-cancel')
+    };
+    
+    /* ====================================== */
+    /* INICIALIZACIÓN */
+    /* ====================================== */
+    function init() {
+      loadClientDataFromURL();
+      setupDateLimits();
+      setupEventListeners();
+    }
+    
+    function loadClientDataFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      state.clientData.name = params.get('name') || '';
+      state.clientData.email = params.get('email') || '';
+      state.clientData.phone = params.get('phone') || '';
+      
+      elements.inputName.value = state.clientData.name;
+      elements.inputEmail.value = state.clientData.email;
+      elements.inputPhone.value = state.clientData.phone;
+    }
+    
+    function setupDateLimits() {
+      const today = new Date();
+      const minDate = new Date(today);
+      minDate.setDate(today.getDate() + CONFIG.behavior.minDate);
+      
+      const maxDate = new Date(today);
+      maxDate.setDate(today.getDate() + CONFIG.behavior.maxDate);
+      
+      elements.inputDate.min = minDate.toISOString().split('T')[0];
+      elements.inputDate.max = maxDate.toISOString().split('T')[0];
+    }
+    
+    function setupEventListeners() {
+      elements.inputDate.addEventListener('change', handleDateChange);
+      elements.buttonConfirm.addEventListener('click', handleConfirm);
+      elements.buttonCancel.addEventListener('click', handleCancel);
+      
+      elements.inputName.addEventListener('input', (e) => {
+        state.clientData.name = e.target.value;
+      });
+      elements.inputEmail.addEventListener('input', (e) => {
+        state.clientData.email = e.target.value;
+      });
+      elements.inputPhone.addEventListener('input', (e) => {
+        state.clientData.phone = e.target.value;
+      });
+
+      // Agregar listeners para los botones de tipo de reunión
+      document.querySelectorAll('.meeting-type-option').forEach(option => {
+        option.addEventListener('click', (e) => {
+          // Remover selección anterior
+          document.querySelectorAll('.meeting-type-option').forEach(opt => {
+            opt.classList.remove('selected');
+          });
+          
+          // Seleccionar nueva opción
+          e.target.classList.add('selected');
+          state.clientData.meetingType = e.target.dataset.type;
+          
+          // Validar formulario
+          validateForm();
+        });
+      });
+    }
+
+    function validateForm() {
+      const isValid = 
+        state.clientData.name.trim() !== '' &&
+        state.clientData.email.trim() !== '' &&
+        state.clientData.phone.trim() !== '' &&
+        state.clientData.meetingType !== '';
+      
+      elements.inputDate.disabled = !isValid;
+      if (!isValid) {
+        elements.slotsContainer.classList.add('hidden');
+        elements.buttonConfirm.disabled = true;
+      }
+    }
+    
+    /* ====================================== */
+    /* MANEJO DE EVENTOS */
+    /* ====================================== */
+    function setLoading(loading) {
+      document.body.classList.toggle('loading', loading);
+    }
+
+    async function handleDateChange(e) {
+      state.selectedDate = e.target.value;
+      state.selectedSlot = null;
+      elements.buttonConfirm.disabled = true;
+      
+      if (!state.selectedDate) return;
+      
+      elements.slotsContainer.classList.remove('hidden');
+      elements.loadingMessage.classList.remove('hidden');
+      elements.slotsGrid.innerHTML = '';
+      hideError();
+      
+      setLoading(true);
+      
+      try {
+        const slots = await fetchAvailableSlots(state.selectedDate);
+        state.availableSlots = slots;
+        renderSlots(slots);
+      } catch (error) {
+        showError(error.message);
+      } finally {
+        elements.loadingMessage.classList.add('hidden');
+        setLoading(false);
+      }
+    }
+    
+    function handleSlotClick(slot) {
+      if (!slot.available) return;
+      
+      state.selectedSlot = slot;
+      
+      // Actualizar UI
+      document.querySelectorAll('.slot').forEach(el => {
+        el.classList.remove('selected');
+      });
+      event.target.classList.add('selected');
+      
+      elements.buttonConfirm.disabled = false;
+    }
+    
+    async function handleConfirm() {
+      if (!state.selectedSlot) return;
+      
+      elements.buttonConfirm.disabled = true;
+      hideError();
+      setLoading(true);
+      
+      try {
+        console.log('💫 Iniciando confirmación de cita...');
+        const result = await makeBooking({
+          name: state.clientData.name,
+          email: state.clientData.email,
+          phone: state.clientData.phone,
+          meetingType: state.clientData.meetingType,
+          date: state.selectedDate,
+          time: state.selectedSlot.time,
+          source: 'calendario-widget'
+        });
+        
+        console.log('✅ Cita creada exitosamente:', result);
+        
+        // Mostrar éxito
+        elements.formContainer.classList.add('hidden');
+        elements.successContainer.classList.remove('hidden');
+        
+        // Preparar mensaje para el parent
+        const message = {
+          action: 'booking_confirmed',
+          data: {
+            date: state.selectedDate,
+            time: state.selectedSlot.time,
+            display: state.selectedSlot.display,
+            eventId: result.bookingDetails?.eventId,
+            eventLink: result.bookingDetails?.eventLink,
+            // Incluir datos del cliente
+            clientData: {
+              name: state.clientData.name,
+              email: state.clientData.email,
+              phone: state.clientData.phone,
+              meetingType: state.clientData.meetingType
+            }
+          }
+        };
+        
+        console.log('📤 Enviando mensaje al parent:', message);
+        
+        // Notificar al parent window
+        notifyParent(message);
+        
+        // Cerrar después de un delay
+        setTimeout(() => {
+          console.log('🔄 Cerrando calendario...');
+          notifyParent({ action: 'close_calendar' });
+        }, CONFIG.behavior.autoCloseDelay);
+        
+      } catch (error) {
+        showError(error.message);
+        elements.buttonConfirm.disabled = false;
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    function handleCancel() {
+      notifyParent({ action: 'cancel_booking' });
+    }
+    
+    /* ====================================== */
+    /* API CALLS */
+    /* ====================================== */
+    async function fetchAvailableSlots(date) {
+      const response = await fetch(CONFIG.webhooks.checkSlots, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ date })
+      });
+      
+      if (!response.ok) {
+        throw new Error('Error al consultar disponibilidad');
+      }
+      
+      const data = await response.json();
+      
+      if (!data.isWorkingDay) {
+        throw new Error(data.holidayMessage || data.weekendMessage || CONFIG.texts.messageNoSlots);
+      }
+      
+      return data.availableSlots || [];
+    }
+    
+    async function makeBooking(bookingData) {
+      const response = await fetch(CONFIG.webhooks.makeBooking, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bookingData)
+      });
+      
+      if (!response.ok) {
+        throw new Error('Error al crear la cita');
+      }
+      
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error(data.error || CONFIG.texts.messageError);
+      }
+      
+      return data;
+    }
+    
+    /* ====================================== */
+    /* RENDERIZADO */
+    /* ====================================== */
+    function renderSlots(slots) {
+      elements.slotsGrid.innerHTML = '';
+      
+      if (!slots || slots.length === 0) {
+        elements.slotsGrid.innerHTML = `<div class="loading-message">${CONFIG.texts.messageNoSlots}</div>`;
+        return;
+      }
+      
+      slots.forEach(slot => {
+        const slotElement = document.createElement('div');
+        slotElement.className = `slot ${slot.available ? 'available' : 'occupied'}`;
+        slotElement.textContent = slot.display;
+        
+        if (slot.available) {
+          slotElement.addEventListener('click', () => handleSlotClick(slot));
+        }
+        
+        elements.slotsGrid.appendChild(slotElement);
+      });
+    }
+    
+    /* ====================================== */
+    /* UTILIDADES */
+    /* ====================================== */
+    function showError(message) {
+      elements.errorContainer.textContent = message;
+      elements.errorContainer.classList.remove('hidden');
+    }
+    
+    function hideError() {
+      elements.errorContainer.classList.add('hidden');
+    }
+    
+    function notifyParent(message) {
+      if (window.parent) {
+        console.log('📤 Enviando mensaje al parent:', message);
+        window.parent.postMessage(message, '*');
+      }
+    }
+
+    /* ====================================== */
+    /* INICIO */
+    /* ====================================== */
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  </script>
+</body>
+</html>
