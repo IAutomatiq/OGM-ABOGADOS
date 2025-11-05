@@ -524,6 +524,7 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem;
             margin-top: 3rem;
+            justify-items: center;
         }
 
         .team-card {
@@ -535,6 +536,8 @@
             transition: all 0.4s ease;
             position: relative;
             opacity: 0;
+            max-width: 400px;
+            width: 100%;
         }
 
         .team-card:hover {
@@ -999,14 +1002,14 @@
             fill: var(--ogm-white);
         }
 
-        /* N8N Assistant Float Button */
-        .n8n-float {
+        /* Bot Azul Float Button (Público) */
+        .bot-azul-float {
             position: fixed;
-            bottom: 110px; /* 60px del botón + 30px del margen bottom + 20px de separación */
+            bottom: 110px;
             right: 30px;
             width: 60px;
             height: 60px;
-            background: var(--ogm-gold);
+            background: #2196F3;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1015,10 +1018,11 @@
             z-index: 999;
             transition: all 0.3s ease;
             animation: pulse 6s infinite;
-            animation-delay: 3s; /* Desfase con el botón de WhatsApp */
+            animation-delay: 2s;
+            cursor: pointer;
         }
 
-        .n8n-float::before {
+        .bot-azul-float::before {
             content: '';
             position: absolute;
             top: -5px;
@@ -1026,22 +1030,71 @@
             right: -5px;
             bottom: -5px;
             border-radius: 50%;
-            border: 2px solid var(--ogm-gold);
+            border: 2px solid #2196F3;
             animation: ripple 2s infinite;
-            animation-delay: 1s; /* Desfase con el efecto del WhatsApp */
+            animation-delay: 0.5s;
         }
 
-        .n8n-float:hover {
+        .bot-azul-float:hover {
             transform: scale(1.15) rotate(10deg);
             box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
 
-        .n8n-float:focus {
+        .bot-azul-float:focus {
             outline: 3px solid var(--ogm-white);
             outline-offset: 3px;
         }
 
-        .n8n-float svg {
+        .bot-azul-float svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--ogm-white);
+        }
+
+        /* Bot Verde Float Button (Privado) */
+        .bot-verde-float {
+            position: fixed;
+            bottom: 190px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 999;
+            transition: all 0.3s ease;
+            animation: pulse 6s infinite;
+            animation-delay: 4s;
+            cursor: pointer;
+        }
+
+        .bot-verde-float::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid #4CAF50;
+            animation: ripple 2s infinite;
+            animation-delay: 1s;
+        }
+
+        .bot-verde-float:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .bot-verde-float:focus {
+            outline: 3px solid var(--ogm-white);
+            outline-offset: 3px;
+        }
+
+        .bot-verde-float svg {
             width: 32px;
             height: 32px;
             fill: var(--ogm-white);
@@ -1065,7 +1118,8 @@
         }
 
         .whatsapp-float:hover .float-button-tooltip,
-        .n8n-float:hover .float-button-tooltip {
+        .bot-azul-float:hover .float-button-tooltip,
+        .bot-verde-float:hover .float-button-tooltip {
             opacity: 1;
         }
 
@@ -1489,18 +1543,6 @@
                 <p class="team-role">Fundador</p>
                 <p class="team-specialty">Especialista en Derecho Laboral<br>Matrícula #10006</p>
             </div>
-            <div class="team-card">
-                <div class="team-avatar">LM</div>
-                <h3>Dr. Leonardo Miatello</h3>
-                <p class="team-role">Co-fundador</p>
-                <p class="team-specialty">Especialista en Derecho Civil y Comercial</p>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">MG</div>
-                <h3>Dra. María Guevara</h3>
-                <p class="team-role">Co-fundadora</p>
-                <p class="team-specialty">Especialista en Derecho Societario y Familia</p>
-            </div>
         </div>
         <div class="team-note">
             Cada consulta es atendida directamente por nuestros abogados
@@ -1899,9 +1941,9 @@
         </svg>
     </a>
 
-    <!-- N8N Assistant Float Button -->
-    <a href="TU_URL_DE_N8N_AQUI" target="_blank" rel="noopener noreferrer" class="n8n-float" aria-label="Asistente OGM Abogados">
-        <span class="float-button-tooltip">Asistente OGM</span>
+    <!-- Bot Azul Float Button (Público) -->
+    <div class="bot-azul-float" id="bot-azul" aria-label="Asistente Público OGM">
+        <span class="float-button-tooltip">Asistente Público</span>
         <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
             <!-- Cabeza del bot (círculo) -->
             <circle cx="32" cy="32" r="18" fill="#FFFFFF"/>
@@ -1915,17 +1957,49 @@
             <path d="M 49 28 Q 46 28 46 32 Q 46 36 49 36" fill="none" stroke="#FFFFFF" stroke-width="2"/>
             
             <!-- Ojos felices -->
-            <path d="M 24 29 Q 26 31 28 29" fill="none" stroke="#0F1C2E" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M 36 29 Q 38 31 40 29" fill="none" stroke="#0F1C2E" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M 24 29 Q 26 31 28 29" fill="none" stroke="#2196F3" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M 36 29 Q 38 31 40 29" fill="none" stroke="#2196F3" stroke-width="2.5" stroke-linecap="round"/>
             
             <!-- Sonrisa -->
-            <path d="M 24 38 Q 32 42 40 38" fill="none" stroke="#0F1C2E" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M 24 38 Q 32 42 40 38" fill="none" stroke="#2196F3" stroke-width="2.5" stroke-linecap="round"/>
             
             <!-- Antena -->
             <line x1="32" y1="14" x2="32" y2="10" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
             <circle cx="32" cy="8" r="2.5" fill="#FFFFFF"/>
         </svg>
-    </a>
+    </div>
+
+    <!-- Bot Verde Float Button (Privado) -->
+    <div class="bot-verde-float" id="bot-verde" aria-label="Asistente Privado OGM">
+        <span class="float-button-tooltip">Asistente Privado</span>
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <!-- Cabeza del bot (círculo) -->
+            <circle cx="32" cy="32" r="18" fill="#FFFFFF"/>
+            
+            <!-- Auricular izquierdo -->
+            <rect x="10" y="26" width="5" height="12" rx="2.5" fill="#FFFFFF"/>
+            <path d="M 15 28 Q 18 28 18 32 Q 18 36 15 36" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+            
+            <!-- Auricular derecho -->
+            <rect x="49" y="26" width="5" height="12" rx="2.5" fill="#FFFFFF"/>
+            <path d="M 49 28 Q 46 28 46 32 Q 46 36 49 36" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+            
+            <!-- Ojos felices -->
+            <path d="M 24 29 Q 26 31 28 29" fill="none" stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M 36 29 Q 38 31 40 29" fill="none" stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round"/>
+            
+            <!-- Sonrisa -->
+            <path d="M 24 38 Q 32 42 40 38" fill="none" stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round"/>
+            
+            <!-- Antena -->
+            <line x1="32" y1="14" x2="32" y2="10" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="32" cy="8" r="2.5" fill="#FFFFFF"/>
+            
+            <!-- Candado (símbolo de privado) -->
+            <rect x="28" y="44" width="8" height="6" rx="1" fill="#FFFFFF"/>
+            <path d="M 29 44 L 29 42 Q 29 40 32 40 Q 35 40 35 42 L 35 44" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+    </div>
 
     <script>
         // Parallax effect for hero
@@ -2153,9 +2227,72 @@
                 }
             });
         });
+
+        // ============================================
+        // CONECTAR BOTONES PERSONALIZADOS CON WIDGETS
+        // ============================================
+        
+        // Esperar a que los widgets se carguen completamente
+        window.addEventListener('load', function() {
+            // Ocultar los botones originales de los widgets
+            const hideOriginalButtons = setInterval(function() {
+                const publicoBtn = document.getElementById('iautomatiq-chat-button');
+                const privadoBtn = document.getElementById('iautomatiq-chat-button-privado');
+                const publicoTooltip = document.getElementById('iautomatiq-tooltip');
+                const privadoTooltip = document.getElementById('iautomatiq-tooltip-privado');
+                
+                if (publicoBtn) {
+                    publicoBtn.style.display = 'none';
+                    if (publicoTooltip) publicoTooltip.style.display = 'none';
+                }
+                
+                if (privadoBtn) {
+                    privadoBtn.style.display = 'none';
+                    if (privadoTooltip) privadoTooltip.style.display = 'none';
+                }
+                
+                // Si ambos botones están ocultos, detener el intervalo
+                if (publicoBtn && privadoBtn) {
+                    clearInterval(hideOriginalButtons);
+                    console.log('✅ Botones originales de widgets ocultos');
+                }
+            }, 100);
+            
+            // Conectar bot azul (público)
+            const botAzul = document.getElementById('bot-azul');
+            if (botAzul) {
+                botAzul.addEventListener('click', function() {
+                    // Simular click en el botón original del widget público
+                    const publicoBtn = document.getElementById('iautomatiq-chat-button');
+                    if (publicoBtn) {
+                        publicoBtn.click();
+                        console.log('🔵 Bot Azul (Público) activado');
+                    } else {
+                        console.warn('⚠️ Widget público no encontrado');
+                    }
+                });
+            }
+            
+            // Conectar bot verde (privado)
+            const botVerde = document.getElementById('bot-verde');
+            if (botVerde) {
+                botVerde.addEventListener('click', function() {
+                    // Simular click en el botón original del widget privado
+                    const privadoBtn = document.getElementById('iautomatiq-chat-button-privado');
+                    if (privadoBtn) {
+                        privadoBtn.click();
+                        console.log('🟢 Bot Verde (Privado) activado');
+                    } else {
+                        console.warn('⚠️ Widget privado no encontrado');
+                    }
+                });
+            }
+            
+            console.log('✅ Botones personalizados conectados con los widgets');
+        });
     </script>
-        <script src="chat-widget-publico.js"></script>
-        <script src="chat-widget-privado.js"></script>
+    <script src="chat-widget-publico.js"></script>
+    <script src="chat-widget-privado.js"></script>
 
 </body>
 </html>
